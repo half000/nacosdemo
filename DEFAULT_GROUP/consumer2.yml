@@ -1,0 +1,52 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        register-enabled: true
+
+  devtools:
+    restart:
+      enabled: true
+
+  #是否开启追踪
+  sleuth:
+    enabled: true
+
+#feign配置
+feign:
+  #是否开启hystrix
+  hystrix:
+    enabled: false
+  sentinel:
+    enabled: true
+  #是否使用httpclient  
+  httpclient:
+    enabled: false
+    connection-timeout: 2000
+    read-timeout: 1000
+#ribbon配置
+
+#断路器配置
+hystrix:
+  command:
+    #默认配置
+    default:
+      #执行超时开关
+      execution:
+        timeout:
+          enabled: false
+      #断路器开关
+      circuitBreaker:
+        enabled: true
+    #具体命令配置    
+    IUserController#get(int):
+      execution:
+        timeout:
+          enabled: false
+#是否开放监控web端口 actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,10 @@
+#日志相关配置
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
+

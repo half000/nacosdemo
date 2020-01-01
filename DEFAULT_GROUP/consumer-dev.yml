@@ -1,0 +1,29 @@
+logging:
+  level:
+    root: info
+    com:
+      alibaba:
+        nacos:  
+          client: info
+            
+      netflix:
+        hystrix:
+          strategy:
+            properties:
+              HystrixPropertiesChainedProperty: debug
+      half:
+        base:
+          feign:
+            ITestController: debug
+            IUserController: debug
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            condition:
+              SpringBootCondition: trace
+        web:
+          servlet:
+            DispatcherServlet: debug
+        cloud:
+          sleuth: DEBUG
