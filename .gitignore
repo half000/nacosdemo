@@ -2,8 +2,6 @@
 .mvn/
 mvnw
 mvnw.cmd
-pom.xml
-
 /restClient/
 /com/
 /base/.mvn/
