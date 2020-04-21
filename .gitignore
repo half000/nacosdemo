@@ -12,3 +12,4 @@ mvnw.cmd
 /zipkin/target/
 /base/target/
 /turbine/target/
+!/nacosdemo.iml
