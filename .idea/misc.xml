@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/nacosconsumer/pom.xml" />
         <option value="$PROJECT_DIR$/base/pom.xml" />
         <option value="$PROJECT_DIR$/turbine/pom.xml" />
+        <option value="$PROJECT_DIR$/simpleorm/pom.xml" />
       </list>
     </option>
   </component>

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.Controller;
 
 /**
@@ -28,7 +28,7 @@ public class CacheConfiguration {
 
     @Configuration
     @ConditionalOnClass(Controller.class)
-    public class WebMvcConfig extends WebMvcConfigurationSupport {
+    public class WebMvcConfig implements WebMvcConfigurer {
 
         private final CacheContextInterceptor interceptor;
 
@@ -41,7 +41,7 @@ public class CacheConfiguration {
          * 将 cacheContextInterceptor 添加到拦截器中
          */
         @Override
-        protected void addInterceptors(InterceptorRegistry registry) {
+        public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(interceptor);
         }
     }

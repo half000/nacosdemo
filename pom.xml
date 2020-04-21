@@ -11,9 +11,11 @@
     <modules>
         <module>nacosprovider</module>
         <module>nacosconsumer</module>
+        <module>nacosconsumer2</module>
         <module>turbine</module>
         <module>base</module>
         <module>zipkin</module>
+        <module>simpleorm</module>
     </modules>
     <properties>
         <java.version>11</java.version>
