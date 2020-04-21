@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+/nacosconsumer/target/
+/nacosprovider/target/
+/zipkin/target/
+/nacosconsumer2/target/nacosconsumer2-1.1-SNAPSHOT.jar
+/nacosconsumer2/target/nacosconsumer2-1.1-SNAPSHOT.jar.original
+.gitignore
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml
+src/
+!/.gitignore
