@@ -1,10 +1,14 @@
 # Created by .ignore support plugin (hsz.mobi)
-*/target/
 .mvn/
 mvnw
 mvnw.cmd
 pom.xml
 
-/com/
 !/DEFAULT_GROUP/
 !/.gitignore
+/zipkin/target/
+/simpleorm/target/
+/restClient/
+/com/
+/base/.mvn/
+/simpleorm/target/
