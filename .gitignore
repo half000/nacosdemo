@@ -1,9 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 */target/
-.gitignore
 .mvn/
 mvnw
 mvnw.cmd
 pom.xml
-!/.gitignore
 
+/com/
+!/DEFAULT_GROUP/
+!/.gitignore
