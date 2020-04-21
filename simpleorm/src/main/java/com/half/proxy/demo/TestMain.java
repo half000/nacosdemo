@@ -1,5 +1,6 @@
 package com.half.proxy.demo;
 
+import com.half.proxy.cglib.MyCglibProxy;
 import com.half.proxy.jdk.MyClassLoader;
 import com.half.proxy.jdk.MyProxy;
 
@@ -14,7 +15,18 @@ import java.lang.reflect.Proxy;
 public class TestMain {
 
     public static void main(String[] args) {
-        testMyJdk();
+        //testMyJdk();
+        testCglib();
+    }
+
+    public static void testCglib() {
+        Person person = (Person) new MyCglibProxy().getProxy(Lissa.class);
+        person.sendMail();
+        try {
+            person.sendMail1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testJdk() {
