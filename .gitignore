@@ -4,11 +4,13 @@ mvnw
 mvnw.cmd
 pom.xml
 
-!/DEFAULT_GROUP/
-!/.gitignore
-/zipkin/target/
-/simpleorm/target/
 /restClient/
 /com/
 /base/.mvn/
 /simpleorm/target/
+/nacosconsumer/target/
+/nacosconsumer2/target/
+/nacosprovider/target/
+/zipkin/target/
+/base/target/
+/turbine/target/
