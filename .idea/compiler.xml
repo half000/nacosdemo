@@ -27,7 +27,6 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base" options="-parameters" />
       <module name="demo" options="-parameters" />
-      <module name="nacoscomsumer" options="-parameters" />
       <module name="nacoscomsumer2" options="-parameters" />
       <module name="nacosconsumer" options="-parameters" />
       <module name="nacosconsumer2" options="-parameters" />
