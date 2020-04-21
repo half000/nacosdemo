@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -43,17 +45,21 @@ public class UserAction {
                 rtnUser=iUserController.update(id,user);
                 break;
             case 3:
-                rtnUser=iUserController.delete(id);
+                rtnUser = iUserController.delete(id);
                 break;
             default:
 
         }
         log.info("dddd1");
-        new Thread(()->log.info("dddd2")).start();
+        new Thread(() -> log.info("dddd2")).start();
 
-        if(type== TYPE_ADD){
-            return ""+newId;
+        if (type == TYPE_ADD) {
+            return "" + newId;
         }
         return JSON.toJSONString(rtnUser);
+    }
+
+    public void get(Optional<Map> a) {
+
     }
 }
