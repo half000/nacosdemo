@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "hystrix.command.execution.timeout.enabled",
-      "type": "java.lang.String",
-      "description": "Description for hystrix.command.execution.timeout.enabled."
-  }
-] }
