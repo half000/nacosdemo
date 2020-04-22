@@ -5,6 +5,7 @@ mvnw.cmd
 /restClient/
 /com/
 /base/.mvn/
+/turbine/.mvn/
 /simpleorm/target/
 /nacosconsumer/target/
 /nacosconsumer2/target/
