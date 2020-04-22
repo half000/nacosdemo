@@ -10,6 +10,7 @@
 
     <artifactId>simpleorm</artifactId>
     <name>simpleorm</name>
+    <description>simpleorm</description>
 
     <properties>
         <java.version>1.8</java.version>
