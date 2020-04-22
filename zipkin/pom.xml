@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zipkin</artifactId>
-    <description>zipkin-server</description>
+    <description>springcloud zipkin-server</description>
     <dependencies>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
