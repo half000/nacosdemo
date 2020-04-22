@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.half.nacos.config.TestAutoConfiguration
- #com.half.nacos.config.TestAutoConfigurationB
