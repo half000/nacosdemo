@@ -6,8 +6,8 @@ package com.half.proxy.demo;
  */
 public interface Person {
 
-    void sendMail() throws RuntimeException; //非检查异常
+    String sendMail() throws RuntimeException; //非检查异常
 
-    void sendMail1() throws Exception; //检查异常
+    String sendMail1() throws Exception; //检查异常
 
 }

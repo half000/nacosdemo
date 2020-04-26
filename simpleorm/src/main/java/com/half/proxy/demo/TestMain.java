@@ -3,6 +3,7 @@ package com.half.proxy.demo;
 import com.half.proxy.cglib.MyCglibProxy;
 import com.half.proxy.jdk.MyClassLoader;
 import com.half.proxy.jdk.MyProxy;
+import org.springframework.cglib.core.DebuggingClassWriter;
 
 import java.lang.reflect.Proxy;
 
@@ -20,6 +21,7 @@ public class TestMain {
     }
 
     public static void testCglib() {
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\class");
         Person person = (Person) new MyCglibProxy().getProxy(Lissa.class);
         person.sendMail();
         try {
