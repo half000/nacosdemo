@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zuul
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+zuul:
+  routes:
+    #ignored-services: *
+    api1:
+      path: /api1/**
+      #url:  http://www.baidu.com
+    provider:
+      serviceId: nacosprovider
+      path: /provider/**
+
+ribbon:
+  nacos:
+    enabled: true
+#aichaius配置
+api1:
+  ribbon:
+    listOfServers: www.baidu.com, www.tianya.cn
+
+
+
