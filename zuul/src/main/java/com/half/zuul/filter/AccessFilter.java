@@ -2,16 +2,10 @@ package com.half.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Component
-public class SimpleFilter extends ZuulFilter {
-
-    private static Logger log = LoggerFactory.getLogger(SimpleFilter.class);
+public class AccessFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
@@ -20,7 +14,7 @@ public class SimpleFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 1;
+        return 0;
     }
 
     @Override
@@ -30,13 +24,9 @@ public class SimpleFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-
-        log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+        ctx.set("startTime", System.currentTimeMillis());
 
         return null;
     }
-
 }
