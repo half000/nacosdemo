@@ -19,7 +19,7 @@ zuul:
 ribbon:
   nacos:
     enabled: true
-#aichaius配置
+#archaius配置
 api1:
   ribbon:
     listOfServers: www.baidu.com, www.tianya.cn
