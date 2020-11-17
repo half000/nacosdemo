@@ -2,6 +2,7 @@ package com.half.nacos.config;
 
 import feign.Request;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClientConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -19,7 +20,9 @@ import org.springframework.context.annotation.Bean;
  * SpringClientFactory作为Ribbon相关组件的上下文工厂，feign也用的类似的技术
  * <p>
  *
- * 关键桥梁类是 LoadBalancerClient  连接了loadbalancer相关的组件对象（loadbalancer支持的各种属性）与 springclientfactory自动化配置相关的类
+ * 关键桥梁类是 LoadBalancerClient  连接了loadbalancer相关的组件对象（loadbalancer支持的各种属性）
+ * 与 SpringClientFactory 自动化配置相关的类,其实默认配置类如下
+ * @see RibbonClientConfiguration
  * 并由它提供对外的方法调用支持
  * <p>
  * 如果对其他的rpc扩展使用ribbon，就需要把loadBlancerClient给注入进去，访问serviceInstance时，自动选择实际的endpoint
