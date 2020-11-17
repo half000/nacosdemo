@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * feign hystrix（设置fallback 生效）例子 这里只能针对类设置
+ *
  * @Author: wangwei
  * @Date: 2019-11-30 13:09
  */
