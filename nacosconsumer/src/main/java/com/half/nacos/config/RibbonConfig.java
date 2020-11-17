@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
  * SpringClientFactory作为Ribbon相关组件的上下文工厂，feign也用的类似的技术
  * <p>
  *
- * 关键桥梁类是 LoadBalancerClient  连接了loadbalancer相关的组件对象（loadbalancer支持的各种属性）
+ * 关键桥梁类是 LoadBalancerClient  委托ILoadBalancer（ 组合模式吧，聚合了loadbalancer相关的组件对象loadbalancer支持的各种属性）
  * 与 SpringClientFactory 自动化配置相关的类,其实默认配置类如下
  * @see RibbonClientConfiguration
  * 并由它提供对外的方法调用支持
