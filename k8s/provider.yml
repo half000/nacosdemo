@@ -59,6 +59,9 @@ spec:
           image: "myrepo:5000/nacosprovider:v1"
           resources:
             requests:
+              memory: "500Mi"
+              cpu: "0.3"
+            limits:
               memory: "600Mi"
               cpu: "0.5"
           env:

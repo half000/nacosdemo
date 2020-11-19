@@ -61,6 +61,9 @@ spec:
             requests:
               memory: "600Mi"
               cpu: "0.5"
+            limits:
+              memory: "600Mi"
+              cpu: "0.5"
           env:
             - name: "zk.curator.connectString"
               value: "zk-cs:2181"
