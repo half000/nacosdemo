@@ -1,0 +1,79 @@
+#consumer.yml
+
+# service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacosconsumer-svc
+  labels:
+    app: nacosconsumer
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080
+      name: client
+  selector:
+    app: nacosconsumer
+
+#PVC
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nacosconsumer-pvc
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+#msgpush Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nacosconsumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nacosconsumer
+  template:
+    metadata:
+      labels:
+        name: nacosconsumer
+        app: nacosconsumer
+    spec:
+      volumes:
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: nacosconsumer-pvc
+      containers:
+        - name: nacosconsumer
+          imagePullPolicy: IfNotPresent
+          image: "nacosconsumer:v1"
+          resources:
+            requests:
+              memory: "600Mi"
+              cpu: "0.5"
+          env:
+            - name: "zk.curator.connectString"
+              value: "zk-cs:2181"
+            - name: "TZ"
+              value: "Asia/Shanghai"
+          ports:
+            - containerPort: 8080
+              name: client
+          volumeMounts:
+            - name: datadir
+              mountPath: /logs
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+
+
