@@ -13,7 +13,7 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30080
+      nodePort: 30280
       name: client
   selector:
     app: nacosconsumer
@@ -56,7 +56,7 @@ spec:
       containers:
         - name: nacosconsumer
           imagePullPolicy: IfNotPresent
-          image: "nacosconsumer:v1"
+          image: "myrepo:5000/nacosconsumer:v1"
           resources:
             requests:
               memory: "600Mi"
