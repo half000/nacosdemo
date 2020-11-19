@@ -1,6 +1,5 @@
 package com.half;
 
-import com.half.proxy.demo.Lissa;
 import com.half.proxy.demo.Person;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +13,7 @@ public class SimpleormApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SimpleormApplication.class, args);
 
-        Person person = applicationContext.getBean(Lissa.class);
+        Person person = applicationContext.getBean(Person.class);
         person.sendMail();
         System.out.println("-------------------分割线-----------------------------------------");
         try {

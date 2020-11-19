@@ -1,7 +1,9 @@
 package com.half.service;
 
-import com.half.dao.Person;
+import com.half.bean.Person;
+import com.half.dao.PersonDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -13,15 +15,18 @@ import javax.annotation.Resource;
 public class PersonImpl implements PersonSvc {
 
     @Resource
-    private Person person;
+    private PersonDao personDao;
 
     @Override
+    @Transactional
     public int selectCount() {
-        return person.selectCount();
+        System.out.println("selectCount");
+        return personDao.selectCount();
     }
 
     @Override
+    @Transactional
     public Person selectOne(int id) {
-        return person.selectOne(id);
+        return personDao.selectOne(id);
     }
 }

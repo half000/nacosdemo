@@ -13,4 +13,10 @@ public class Person {
     private int id;
     private String name;
     private int age;
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("被回收");
+        super.finalize();
+    }
 }

@@ -20,4 +20,9 @@ public class PersonAction {
     public String count() {
         return "" + personSvc.selectCount();
     }
+
+    @RequestMapping("search")
+    public String selectOne() {
+        return "" + personSvc.selectOne(1);
+    }
 }

@@ -1,6 +1,6 @@
 package com.half.service;
 
-import com.half.dao.Person;
+import com.half.bean.Person;
 
 /**
  * @Author: wangwei
