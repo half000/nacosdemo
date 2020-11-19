@@ -59,11 +59,11 @@ spec:
           image: "myrepo:5000/nacosprovider:v1"
           resources:
             requests:
-              memory: "500Mi"
-              cpu: "0.3"
+              memory: "300Mi"
+              cpu: "0.1"
             limits:
-              memory: "600Mi"
-              cpu: "0.5"
+              memory: "500Mi"
+              cpu: "0.4"
           env:
             - name: "spring.profiles.active"
               value: "test"

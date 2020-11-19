@@ -18,6 +18,23 @@ spec:
       targetPort: 7848
   selector:
     app: nacos
+#cs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos-cs
+  labels:
+    app: nacos-cs
+spec:
+  type: NodePort
+  ports:
+    - port: 8843
+      targetPort: 8843
+      nodePort: 30843
+      name: server
+  selector:
+    app: nacos
 #cm
 ---
 apiVersion: v1
