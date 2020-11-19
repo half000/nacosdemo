@@ -107,8 +107,8 @@ spec:
             - name: MYSQL_SERVICE_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: mysql.host
-                  key: mysql.db.name
+                  name: nacos-cm
+                  key: mysql.host
             - name: MYSQL_SERVICE_DB_NAME
               valueFrom:
                 configMapKeyRef:
