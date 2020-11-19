@@ -32,19 +32,19 @@ data:
   mysql.user: "root"
   mysql.password: "root"
 
-#PVC
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nacos-pvc
-spec:
-  storageClassName: managed-nfs-storage
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
+#PVC  sts可以用模板
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: nacos-pvc
+#spec:
+#  storageClassName: managed-nfs-storage
+#  accessModes:
+#    - ReadWriteMany
+#  resources:
+#    requests:
+#      storage: 2Gi
 # sts
 ---
 apiVersion: apps/v1
@@ -143,13 +143,29 @@ spec:
               #value: "nacos-0.nacos-hs.default.svc.cluster.local:8848 nacos-1.nacos-hs.default.svc.cluster.local:8848 nacos-2.nacos-hs.default.svc.cluster.local:8848"
           volumeMounts:
             - name: datadir
-              mountPath: data
-
-      volumes:
-        - name: datadir
-          persistentVolumeClaim:
-            claimName: nacos-pvc
-
+              mountPath: /home/nacos/data
+            - name: logdir
+              mountPath: /home/nacos/logs
+  volumeClaimTemplates:
+    - metadata:
+        name: datadir
+      spec:
+        accessModes: [ "ReadWriteMany" ]
+        storageClassName: managed-nfs-storage
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: logdir
+      #过时了
+      #       annotations:
+      #          volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
+      spec:
+        accessModes: [ "ReadWriteMany" ]
+        storageClassName: managed-nfs-storage
+        resources:
+          requests:
+            storage: 1Gi
   selector:
     matchLabels:
       app: nacos
