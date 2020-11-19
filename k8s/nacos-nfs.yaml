@@ -109,6 +109,8 @@ spec:
               #mysql配置
             - name: SPRING_DATASOURCE_PLATFORM
               value: "mysql"
+            - name: MYSQL_SERVICE_DB_PARAM
+              value: "serverTimezone=Asia/Shanghai&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true"
             - name: MYSQL_SERVICE_HOST
               valueFrom:
                 configMapKeyRef:
