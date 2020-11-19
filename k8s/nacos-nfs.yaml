@@ -149,8 +149,8 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /home/nacos/data
-            - name: logdir
-              mountPath: /home/nacos/logs
+            #- name: logdir
+            #  mountPath: /home/nacos/logs
   volumeClaimTemplates:
     - metadata:
         name: datadir
