@@ -11,7 +11,7 @@
 
     <artifactId>nacosconsumer</artifactId>
 
-    <description>Demo project for Spring Boot</description>
+    <description>nacos consumer project for Spring Boot</description>
     <dependencies>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
