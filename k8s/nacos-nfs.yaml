@@ -107,6 +107,8 @@ spec:
             - name: NACOS_REPLICAS
               value: "3"
               #mysql配置
+            - name: SPRING_DATASOURCE_PLATFORM
+              value: "mysql"
             - name: MYSQL_SERVICE_HOST
               valueFrom:
                 configMapKeyRef:
