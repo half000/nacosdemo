@@ -16,11 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * Hystrix例子 注解形式
+ * @HystrixCommand 方式
  * @Author:  wangwei
  * @Date: 2019-12-09 21:15
  */
 @Service
-//共同属性
+//@HystrixCommand共同属性
 @DefaultProperties(defaultFallback = "fallBack",
         commandProperties = {
                 /**
@@ -67,11 +69,11 @@ public class OrderService2Impl implements OrderService {
     @HystrixCommand(threadPoolKey = "hystrix-OrderService", fallbackMethod = "getFallBack",
             commandProperties = {@HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
                     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
-                    @HystrixProperty(name = "execution.isolation.thread.interruptOnTimeout", value = "1000"),
-                    @HystrixProperty(name = "execution.isolation.thread.interruptOnFutureCancel", value = "false")
+                    @HystrixProperty(name = "execution.isolation.thread.interruptOnTimeout", value = "true")
+                   // @HystrixProperty(name = "execution.isolation.thread.interruptOnFutureCancel", value = "false")
 
             })
-    public Order get(int orderId) {
+    public Order get1(int orderId) {
         return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
     }
 
@@ -94,10 +96,10 @@ public class OrderService2Impl implements OrderService {
     }
 
     public Order getFallBack(int orderId) {
-        return new Order(1, 1, "降级", true);
+        return new Order(orderId, 1, "指定getFallBack降级", false);
     }
 
     public Order fallBack() {
-        return new Order(1, 1, "降级", true);
+        return new Order(1, 1, "默认fallBack降级", false);
     }
 }

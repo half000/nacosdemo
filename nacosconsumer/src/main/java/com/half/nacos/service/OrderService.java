@@ -8,7 +8,7 @@ import com.half.base.bean.Order;
  */
 public interface OrderService {
 
-    Order get(int orderId);
+    Order get1(int orderId);
 
     Order get2(int orderId);
 }

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 测试resttemplate的各种方法
+ *  媒体类型 urlencoded 与json 区别
  * @Author: wangwei
  * @Date: 2019-11-18 22:22
  */

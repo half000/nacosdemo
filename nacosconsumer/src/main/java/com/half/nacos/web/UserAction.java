@@ -12,6 +12,8 @@ import java.util.Optional;
 
 
 /**
+ * feign客户端测试，带hystrix降级的
+ *
  * @Author: wangwei
  * @Date: 2019-11-30 8:55
  */

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * feign客户端测试  不带histrix的
  * @Author: wangwei
  * @Date: 2019-11-26 21:38
  */
@@ -39,9 +40,9 @@ public class TestFeignAction {
 
         switch (id) {
             case 0:
-                return ITestController.test(id,name);
+                return ITestController.get1(id,name);
             case 1:
-                return ITestController.test1(id,name,name);
+                return ITestController.get2(id,name,name);
             case 10:
                 return ITestController.post(header,param,body);
 

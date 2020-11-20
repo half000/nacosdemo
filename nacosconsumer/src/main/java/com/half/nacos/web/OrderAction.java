@@ -14,6 +14,8 @@ import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 /**
+ *  用来测试hystrix的使用
+ *  全是查询方法模拟
  * @Author: wangwei
  * @Date: 2019-12-09 21:49
  */
@@ -36,11 +38,19 @@ public class OrderAction {
     })
        ;
 
+    /**
+     * 单个请求
+     * @return
+     */
     @GetMapping("get")
     public Order get(){
-        return orderService.get(10000);
+        return orderService.get1(10000);
     }
 
+    /**
+     * 缓存测试，不同histrixcommand 缓存不同
+     * @return
+     */
     @GetMapping("get1")
     public Order get1(){
         System.out.println("调用");
@@ -52,12 +62,17 @@ public class OrderAction {
         return orderService.get2(10001).apply(System.out::println);
     }
 
-    @GetMapping("gets")
-    public String get(@RequestParam(defaultValue = "100") int count){
-       // Random random=new Random();
+    /**
+     * 并发多个请求，用来触发histrix的thread熔断降级
+     * @param count
+     * @return
+     */
+    @GetMapping("gets1")
+    public String gets1(@RequestParam(defaultValue = "100") int count){
+        // Random random=new Random();
         IntStream.range(0,count).parallel().mapToObj(i-> {
                     try {
-                        return executorService.submit(() -> orderService.get(10000)).get();
+                        return executorService.submit(() -> orderService.get1(10000)).get();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
@@ -66,7 +81,31 @@ public class OrderAction {
                     return null;
                 }
 
-         ).forEach(System.out::println);
+        ).forEach(System.out::println);
+
+        return "success";
+    }
+
+    /**
+     * 并发多个请求，用来触发histrix的 semaphore 熔断降级
+     * @param count
+     * @return
+     */
+    @GetMapping("gets2")
+    public String gets2(@RequestParam(defaultValue = "100") int count){
+        // Random random=new Random();
+        IntStream.range(0,count).parallel().mapToObj(i-> {
+                    try {
+                        return executorService.submit(() -> orderService.get2(10000)).get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+        ).forEach(System.out::println);
 
         return "success";
     }

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * Hystrix例子 注解形式
+ *
  * @author  wangwei
  * @Date  2019-12-09 21:15
  */
@@ -24,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 @DefaultProperties(defaultFallback = "fallBack",
         commandProperties = {
                 /**
+                 *  默认配置
                  *  参考以下文件
                  *  {@link HystrixPropertiesManager}
                  *  {@link HystrixCommandProperties}
@@ -58,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
     private RestTemplate restTemplate;
 
     /**
-     * 线程池隔离
+     * 线程池隔离  支持超时中断，占用资源相对大
      *
      * @param orderId
      * @return
@@ -67,17 +70,17 @@ public class OrderServiceImpl implements OrderService {
     @HystrixCommand(threadPoolKey = "hystrix-OrderService", fallbackMethod = "getFallBack",
             commandProperties = {@HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
                     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
-                    @HystrixProperty(name = "execution.isolation.thread.interruptOnTimeout", value = "1000"),
-                    @HystrixProperty(name = "execution.isolation.thread.interruptOnFutureCancel", value = "false")
+                    @HystrixProperty(name = "execution.isolation.thread.interruptOnTimeout", value = "true")//,
+                   // @HystrixProperty(name = "execution.isolation.thread.interruptOnFutureCancel", value = "false")
 
             })
-    public Order get(int orderId) {
+    public Order get1(int orderId) {
         return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
     }
 
     /**
-     * 信号量隔离
-     *
+     * 信号量隔离 不支持超时
+     *  缓存支持
      * @param orderId
      * @return
      */
@@ -94,10 +97,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Order getFallBack(int orderId) {
-        return new Order(1, 1, "降级", true);
+        return new Order(orderId, 1, "指定getFallBack降级", false);
     }
 
     public Order fallBack() {
-        return new Order(1, 1, "降级", true);
+        return new Order(1, 1, "默认fallBack降级", false);
     }
 }

@@ -4,8 +4,8 @@ import com.half.nacos.model.Person;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * {@link } {@link RestController}
- * 广告资源位...
+ *  {@link RestController}
+ *  restful注解 相关测试类
  *
  * @author mercyblitz
  * @date 2017-10-14
@@ -25,8 +25,8 @@ public class PersonRestController {
     }
 
     @PostMapping(value = "/person/json/to/properties",
-            consumes = "text/plain",
-            produces = "application/properties+person" // 响应类型
+            consumes = "text/plain",  //请求类型，可消费的类型 content-type
+            produces = "application/properties+person" // 响应类型 可生产的类型 accept
     )
     public Person personJsonToProperties(@RequestParam String json) {
 
