@@ -65,6 +65,8 @@ spec:
               memory: "600Mi"
               cpu: "0.5"
           env:
+            - name: "server.port"
+              value: 8080
             - name: "zk.curator.connectString"
               value: "zk-cs:2181"
             - name: "TZ"
