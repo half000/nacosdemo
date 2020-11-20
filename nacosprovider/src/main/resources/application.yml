@@ -2,15 +2,6 @@
 spring:
   application:
     name: nacosprovider
-#zipkin服务器地址 支持注册发现
-  zipkin:
-    base-url: http://localhost:9411/
-#sleuth采样配置 %比 以及每秒最大采样数
-  sleuth:
-    sampler:
-      probability: 1.0
-      rate: 50
-
 server:
   port: 9010
 

@@ -1,0 +1,15 @@
+#放不支持自动刷新的配置 应用名 等
+spring:
+#zipkin服务器地址 支持注册发现
+  zipkin:
+    base-url: http://zipkin-svc:9411/
+#sleuth采样配置 %比 以及每秒最大采样数
+  sleuth:
+    sampler:
+      probability: 1.0
+      rate: 50
+
+
+
+
+
