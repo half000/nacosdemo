@@ -3,6 +3,8 @@ package com.half.nacos.hystrix;
 import com.netflix.hystrix.*;
 
 /**
+ * Hystrix例子 原生模式
+ *
  * @Author: wangwei
  * @Date: 2019-12-07 9:33
  */
@@ -16,6 +18,7 @@ public class CommandHelloWorld extends HystrixCommand<String> {
                         .withExecutionTimeoutEnabled(true)
                         .withExecutionTimeoutInMilliseconds(600000)
                         .withExecutionIsolationThreadInterruptOnTimeout(false))
+
                 .andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter()
                         .withCoreSize(1)
                         .withMaximumSize(2))
