@@ -55,7 +55,7 @@ spec:
             claimName: nacosconsumer-pvc
       containers:
         - name: nacosconsumer
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: "myrepo:5000/nacosconsumer:v1"
           resources:
             requests:
