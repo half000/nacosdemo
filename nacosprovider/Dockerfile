@@ -15,6 +15,7 @@ ADD target/nacosprovider-1.1-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
 ENV APP_PORT 8080
 EXPOSE 8080
+USER root
 # 运行jar包
 ENTRYPOINT ["java","-XX:+PrintGCDetails",  "-Xmx400m", "-Xms400m", "-Xss256k","-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7003", \
 "-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${APP_PORT}","-jar","/app.jar"]

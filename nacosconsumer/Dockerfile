@@ -10,7 +10,7 @@ MAINTAINER wangwei <271936145@qq.com>
 #因为 Spring Boot 使用的内嵌 Tomcat 容器默认使用/tmp作为工作目录
 VOLUME /tmp
 # 将jar包添加到容器中并更名为app.jar
-ADD nacoscomsumer-1.1-SNAPSHOT.jar app.jar
+ADD target/nacosconsumer-1.1-SNAPSHOT.jar app.jar
 # 修改jar的信息
 RUN bash -c 'touch /app.jar'
 ENV APP_PORT 8080

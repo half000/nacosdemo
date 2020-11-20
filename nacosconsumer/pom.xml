@@ -97,8 +97,62 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <executions>
+                    <execution>
+                        <id>upload-deploy</id>
+                        <!-- 运行package打包的同时运行upload-single和sshexec -->
+                        <phase>package</phase>
+                        <goals>
+                            <!--多文件上传 docker 镜像相关-->
+                            <goal>upload</goal>
+                            <!--单文件上传 k8s部署文件-->
+                            <goal>upload-single</goal>
+                            <goal>sshexec</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <serverId>mylinuxserver</serverId>-->
+                            <includes>Dockerfile,target/nacosconsumer-1.1-SNAPSHOT.jar</includes>
+                            <fromFile>../k8s/consumer.yml</fromFile>
+                            <toFile>../../../yml/nacosdemo/consumer.yml</toFile>
+                            <url>${url}</url>
+                            <commands>
+                                <!-- 打包镜像并推到仓库  -->
+                                <command>${buildImage}</command>
+                                <command>${tagImage}</command>
+                                <command>${pushImage}</command>
+                                <command>${delImageTag}</command>
+                                <!-- start application -->
+                                <command>${startPod}</command>
+                            </commands>
+                            <displayCommandOutputs>true</displayCommandOutputs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <url>scp://root:root@192.168.200.190:22/k8s/img/nacosdemo/consumer</url>
+                <buildImage>docker build -f /k8s/img/nacosdemo/consumer/Dockerfile -t nacosconsumer:v1 /k8s/img/nacosdemo/consumer </buildImage>
+                <tagImage>docker tag nacosconsumer:v1 myrepo:5000/nacosconsumer:v1</tagImage>
+                <pushImage>docker push myrepo:5000/nacosconsumer:v1</pushImage>
+                <delImageTag>docker rmi myrepo:5000/nacosconsumer:v1</delImageTag>
+                <!-- start application -->
+                <startPod>kubectl apply -f /k8s/yml/nacosdemo/consumer.yml</startPod>
 
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </project>

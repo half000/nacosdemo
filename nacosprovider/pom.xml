@@ -109,6 +109,7 @@
                             <command>${buildImage}</command>
                             <command>${tagImage}</command>
                             <command>${pushImage}</command>
+                            <command>${delImageTag}</command>
                             <!-- start application -->
                             <command>${startPod}</command>
                         </commands>
@@ -127,9 +128,10 @@
             <id>dev</id>
             <properties>
                 <url>scp://root:root@192.168.200.190:22/k8s/img/nacosdemo/provider</url>
-                <buildImage>docker build -f /k8s/img/nacosdemo/provider/Dockerfile -t nacosprovider:v1 /k8s/img/nacosdemo/provider</buildImage>
+                <buildImage>docker build -f /k8s/img/nacosdemo/provider/Dockerfile -t nacosprovider:v1 /k8s/img/nacosdemo/provider </buildImage>
                 <tagImage>docker tag nacosprovider:v1 myrepo:5000/nacosprovider:v1</tagImage>
                 <pushImage>docker push myrepo:5000/nacosprovider:v1</pushImage>
+                <delImageTag>docker rmi myrepo:5000/nacosprovider:v1</delImageTag>
                 <!-- start application -->
                 <startPod>kubectl apply -f /k8s/yml/nacosdemo/provider.yml</startPod>
 

@@ -59,14 +59,17 @@ spec:
           image: "myrepo:5000/nacosconsumer:v1"
           resources:
             requests:
-              memory: "600Mi"
-              cpu: "0.5"
+              memory: "300Mi"
+              cpu: "0.1"
             limits:
               memory: "600Mi"
-              cpu: "0.5"
+              cpu: "0.4"
           env:
+            #激活test配置
+            - name: "spring.profiles.active"
+              value: "test"
             - name: "server.port"
-              value: 8080
+              value: "8080"
             - name: "zk.curator.connectString"
               value: "zk-cs:2181"
             - name: "TZ"
@@ -77,8 +80,8 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /logs
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+#      securityContext:
+#        runAsUser: 1000
+#        fsGroup: 1000
 
 

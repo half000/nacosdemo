@@ -81,8 +81,9 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /logs
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+      #指定用户运行，会覆盖image中执行的用户
+#      securityContext:
+#        runAsUser: 1000
+#        fsGroup: 1000
 
 
