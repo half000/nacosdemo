@@ -66,17 +66,17 @@ public class OrderAction {
 
         ArrayList<Order> orders = new ArrayList<>();
         System.out.println("调用1");
-        orders.add( orderService.get2(10000));
+        orders.add( orderService.getCache(10000));
         System.out.println("调用2");
-        orders.add( orderService.get2(10000));
+        orders.add( orderService.getCache(10000));
         System.out.println("调用3");
-        orders.add( orderService.get2(10001));
+        orders.add( orderService.getCache(10001));
         System.out.println("调用4");
-        orders.add( orderService.get2(10000));
+        orders.add( orderService.getCache(10000));
         System.out.println("调用5");
-        orders.add( orderService.get2(10001));
+        orders.add( orderService.getCache(10001));
         System.out.println("调用6");
-        orders.add( orderService.get2(10001));
+        orders.add( orderService.getCache(10001));
         return orders;
     }
 
@@ -92,13 +92,13 @@ public class OrderAction {
 
         ArrayList<Order> orders = new ArrayList<>();
         System.out.println("调用1");
-        orders.add( orderService.get2(10000));
+        orders.add( orderService.getCache(10000));
         System.out.println("调用2");
-        orders.add( orderService2.get2(10000));
+        orders.add( orderService2.getCache(10000));
         System.out.println("调用3");
-        orders.add( orderService.get2(10000));
+        orders.add( orderService.getCache(10000));
         System.out.println("调用4");
-        orders.add( orderService2.get2(10000));
+        orders.add( orderService2.getCache(10000));
         return orders;
     }
 

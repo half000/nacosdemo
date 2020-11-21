@@ -1,6 +1,7 @@
 package com.half.nacos.service.impl;
 
 import com.half.base.bean.Order;
+import com.half.nacos.interceptor.CacheContextInterceptor;
 import com.half.nacos.service.OrderService;
 import com.netflix.hystrix.HystrixCommandProperties;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
@@ -17,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Hystrix例子 注解形式
- *
+ * @see com.netflix.hystrix.AbstractCommand#toObservable()
  * @author  wangwei
  * @Date  2019-12-09 21:15
  */
@@ -78,9 +79,24 @@ public class OrderServiceImpl implements OrderService {
         return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
     }
 
+    @HystrixCommand(threadPoolKey = "hystrix-OrderService",
+            commandProperties = {@HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE"),
+                    @HystrixProperty(name = "execution.isolation.semaphore.maxConcurrentRequests", value = "5"),
+                    @HystrixProperty(name = "execution.timeout.enabled", value = "false")
+            })
+    @Override
+    public Order get2(int orderId) {
+        System.out.println("OrderServiceImp执行");
+        return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
+    }
+
     /**
-     * 信号量隔离 不支持超时
+     * 信号量隔离
+     * 信号量的调用是同步的，也就是说，每次调用都得阻塞调用方的线程，直到结果返回。
+     * 这样就导致了无法对访问做超时（只能依靠调用协议超时，无法主动释放）
      *  缓存支持
+     *  首先需要初始化 HystrixRequestContext （ThreadLocal） 要么每次都写，要么MVC的时候加拦截器（跨越线程的时候就不行了）
+     * @see CacheContextInterceptor
      * @param orderId
      * @return
      */
@@ -91,7 +107,7 @@ public class OrderServiceImpl implements OrderService {
                     @HystrixProperty(name = "execution.timeout.enabled", value = "false")
             })
     @Override
-    public Order get2(@CacheKey int orderId) {
+    public Order getCache(@CacheKey int orderId) {
         System.out.println("OrderServiceImp执行");
         return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
     }

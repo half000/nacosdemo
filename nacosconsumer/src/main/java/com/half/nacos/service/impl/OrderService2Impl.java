@@ -90,7 +90,19 @@ public class OrderService2Impl implements OrderService {
                     @HystrixProperty(name = "execution.timeout.enabled", value = "false")
             })
     @Override
-    public Order get2(@CacheKey int orderId) {
+    public Order getCache(@CacheKey int orderId) {
+        System.out.println("OrderServiceImp2执行");
+        return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
+    }
+
+
+    @HystrixCommand(threadPoolKey = "hystrix-OrderService",commandKey = "OrderService2Impl.get2",
+            commandProperties = {@HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE"),
+                    @HystrixProperty(name = "execution.isolation.semaphore.maxConcurrentRequests", value = "5"),
+                    @HystrixProperty(name = "execution.timeout.enabled", value = "false")
+            })
+    @Override
+    public Order get2(int orderId) {
         System.out.println("OrderServiceImp2执行");
         return restTemplate.getForObject("http://nacosprovider/order/" + orderId, Order.class);
     }
