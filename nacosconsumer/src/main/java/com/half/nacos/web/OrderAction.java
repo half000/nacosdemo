@@ -2,6 +2,7 @@ package com.half.nacos.web;
 
 import com.half.base.bean.Order;
 import com.half.nacos.service.OrderService;
+import com.netflix.hystrix.HystrixRequestCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
@@ -48,18 +51,53 @@ public class OrderAction {
     }
 
     /**
-     * 缓存测试，不同histrixcommand 缓存不同
+     * 缓存测试， 必须同一个comand同一个value才生效
+     * 同commandkey，valuekey（@CacheKey）不同，缓存不生效
+     *
+     * cachekey 为 ValueCacheKey
+     * @see HystrixRequestCache.ValueCacheKey  RequestCacheKey+valuekey
+     * @see HystrixRequestCache.RequestCacheKey HystrixCommandKey（HystrixCollapserKey）+type+HystrixConcurrencyStrategy
      * @return
      */
     @GetMapping("get1")
-    public Order get1(){
-        System.out.println("调用");
-        orderService.get2(10000).consumer(System.out::println);
-        System.out.println("调用，走缓存");
-        orderService2.get2(10000).consumer(System.out::println);
-        orderService2.get2(10001).consumer(System.out::println);
-        System.out.println("调用，走缓存");
-        return orderService.get2(10001).apply(System.out::println);
+    public List<Order> get1(){
+
+        ArrayList<Order> orders = new ArrayList<>();
+        System.out.println("调用1");
+        orders.add( orderService.get2(10000));
+        System.out.println("调用2");
+        orders.add( orderService.get2(10000));
+        System.out.println("调用3");
+        orders.add( orderService.get2(10001));
+        System.out.println("调用4");
+        orders.add( orderService.get2(10000));
+        System.out.println("调用5");
+        orders.add( orderService.get2(10001));
+        System.out.println("调用6");
+        orders.add( orderService.get2(10001));
+        return orders;
+    }
+
+    /**
+     * 缓存测试，不同 commandkey 相同valuekey 缓存不同
+     * cachekey 为 ValueCacheKey
+     * @see HystrixRequestCache.ValueCacheKey  RequestCacheKey+valuekey
+     * @see HystrixRequestCache.RequestCacheKey HystrixCommandKey（HystrixCollapserKey）+type+HystrixConcurrencyStrategy
+     * @return
+     */
+    @GetMapping("get2")
+    public List<Order> get2(){
+
+        ArrayList<Order> orders = new ArrayList<>();
+        System.out.println("调用1");
+        orders.add( orderService.get2(10000));
+        System.out.println("调用2");
+        orders.add( orderService2.get2(10000));
+        System.out.println("调用3");
+        orders.add( orderService.get2(10000));
+        System.out.println("调用4");
+        orders.add( orderService2.get2(10000));
+        return orders;
     }
 
     /**
