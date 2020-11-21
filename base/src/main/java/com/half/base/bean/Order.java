@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 @Slf4j
 @ApiModel(value = "Order",description = "订单Bean")
-public class Order {
+public class Order implements Cloneable{
 
     @ApiModelProperty(value="订单id",example = "10000",required = true)
     @NonNull
@@ -44,6 +44,9 @@ public class Order {
     @NonNull
     private boolean status;
 
+    @ApiModelProperty("延迟时间")
+    private long delay;
+
     public void consumer(Consumer  consumer){
         consumer.accept(this);
     }
@@ -51,5 +54,15 @@ public class Order {
     public Order apply(Consumer  consumer){
         consumer.accept(this);
         return this;
+    }
+
+    @Override
+    public Order clone()  {
+        try {
+            return (Order) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return new Order();
     }
 }
