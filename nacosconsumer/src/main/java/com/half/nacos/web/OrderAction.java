@@ -18,6 +18,8 @@ import java.util.stream.IntStream;
 
 /**
  *  用来测试hystrix的使用
+ *  rxjava reactive 事件发布订阅模型，主逻辑在
+ * @see com.netflix.hystrix.AbstractCommand#toObservable()
  *  全是查询方法模拟
  * @Author: wangwei
  * @Date: 2019-12-09 21:49
