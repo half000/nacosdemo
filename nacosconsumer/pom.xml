@@ -125,9 +125,10 @@
                                 <command>${buildImage}</command>
                                 <command>${tagImage}</command>
                                 <command>${pushImage}</command>
-                                <command>${delImageTag}</command>
-                                <!-- start application -->
-                                <command>${startPod}</command>
+<!--                                <command>${delImageTag}</command>-->
+<!--                                &lt;!&ndash; start application &ndash;&gt;-->
+<!--                                <command>${startPod}</command>-->
+                                <command>${delPod}</command>
                             </commands>
                             <displayCommandOutputs>true</displayCommandOutputs>
                         </configuration>
@@ -145,10 +146,10 @@
                 <buildImage>docker build -f /k8s/img/nacosdemo/consumer/Dockerfile -t nacosconsumer:v1 /k8s/img/nacosdemo/consumer </buildImage>
                 <tagImage>docker tag nacosconsumer:v1 myrepo:5000/nacosconsumer:v1</tagImage>
                 <pushImage>docker push myrepo:5000/nacosconsumer:v1</pushImage>
-                <delImageTag>docker rmi myrepo:5000/nacosconsumer:v1</delImageTag>
+<!--                <delImageTag>docker rmi myrepo:5000/nacosconsumer:v1</delImageTag>-->
                 <!-- start application -->
-                <startPod>kubectl apply -f /k8s/yml/nacosdemo/consumer.yml</startPod>
-
+<!--                <startPod>kubectl apply -f /k8s/yml/nacosdemo/consumer.yml</startPod>-->
+                <delPod>kubectl delete pod -l app=nacosconsumer</delPod>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
