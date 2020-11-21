@@ -24,7 +24,7 @@ public interface ITestController {
      * @return
      */
     @GetMapping("{id}/{name}")
-    public String test(@PathVariable("id") int id ,@PathVariable("name") String name);
+    public String get1(@PathVariable("id") int id ,@PathVariable("name") String name);
 
     /**
      *
@@ -37,7 +37,7 @@ public interface ITestController {
      * @return
      */
     @GetMapping("{id}/{name}/{str}")
-    public String test1(@PathVariable int id ,@PathVariable String name,@PathVariable("str") String dd);
+    public String get2(@PathVariable int id ,@PathVariable String name,@PathVariable("str") String dd);
 
     /**
      *
