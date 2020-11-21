@@ -29,14 +29,16 @@ public class OrderController {
     @GetMapping("{orderId}")
     public Order getOrder(@PathVariable int orderId) {
         Random random = new Random();
-
+        long delay=random.nextInt(3000);
         try {
-            Thread.sleep(random.nextInt(3000));
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        return orders.get(orderId);
+        Order order = orders.get(orderId).clone();
+        //输出延迟时间好对比
+        order.setDelay(delay);
+        return order;
     }
 }
